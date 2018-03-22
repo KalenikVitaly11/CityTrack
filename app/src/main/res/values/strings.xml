@@ -1,0 +1,37 @@
+<resources>
+    <integer name="com_vk_sdk_AppId">6407666</integer>
+    <string name="app_name">CityTrack</string>
+    <string name="access_token" translatable="false">pk.eyJ1IjoidmVoZG94IiwiYSI6ImNqZHQ0aHVxZTBsaHkycHQzZzBub2lkaHoifQ.lnmvOCQjmaDSxW-NSuJyKA</string>
+    <string name="title_activity_map_box">MapBoxActivity</string>
+    <string name="title_home">Home</string>
+    <string name="title_dashboard">Dashboard</string>
+    <string name="title_notifications">Notifications</string>
+    <string name="login">user@email.com</string>
+    <string name="password">ad2c3cd0607bb933cd504f1d2db3d03f</string>
+    <string name="welcome">Добро пожаловать \n в</string>
+    <string name="city_track">CityTrack</string>
+
+    <string name="log_in">Войти</string>
+    <string name="sign_up">Зарегистрироваться</string>
+    <string name="registration">Регистрация</string>
+    <string name="enter">Вход</string>
+
+    <string name="name">Имя</string>
+    <string name="surname">Фамилия</string>
+    <string name="birth_date">Дата рождения</string>
+    <string name="email">Email</string>
+    <string name="reg_password">Пароль</string>
+    <string name="reg_social_networks">или используя один из сервисов</string>
+    <string name="forgot_password">Забыли пароль?</string>
+    <string name="reg_continue">Продолжить</string>
+    <string name="start_track">Стартовать трэк</string>
+
+    <string name="facebook_app_id">1532547166801082</string>
+    <string name="fb_login_protocol_scheme">fb1532547166801082</string>
+
+    <string name="sign_in_with_vk">ВКонтакте</string>
+    <string name="sign_in_with_fb">Facebook</string>
+
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+
+</resources>
