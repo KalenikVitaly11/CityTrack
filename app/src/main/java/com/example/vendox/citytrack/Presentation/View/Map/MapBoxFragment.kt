@@ -1,4 +1,4 @@
-package com.example.vendox.citytrack
+package com.example.vendox.citytrack.Presentation.View.Map
 
 import android.app.Fragment
 import android.os.Bundle
@@ -17,6 +17,7 @@ import com.mapbox.mapboxsdk.geometry.LatLng
 import android.util.Log
 import android.widget.Button
 import android.widget.Toast
+import com.example.vendox.citytrack.R
 import com.mapbox.api.directions.v5.models.DirectionsResponse
 import com.mapbox.api.directions.v5.models.DirectionsRoute
 import com.mapbox.geojson.Point
