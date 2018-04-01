@@ -1,9 +1,9 @@
-package com.example.vendox.citytrack
+package com.example.vendox.citytrack.Presentation.View.Map
 
 import android.os.Bundle
 import android.support.design.widget.BottomNavigationView
 import android.support.v7.app.AppCompatActivity
-import com.example.vendox.citytrack.R.string.login
+import com.example.vendox.citytrack.R
 import kotlinx.android.synthetic.main.activity_map_box.*
 
 class MapBoxActivity : AppCompatActivity() {

@@ -1,4 +1,4 @@
-package com.example.vendox.citytrack.EnterFragment
+package com.example.vendox.citytrack.Presentation.View.Authorization.Welcome
 
 import android.app.Fragment
 import android.os.Bundle
@@ -6,16 +6,18 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
+import com.example.vendox.citytrack.Presentation.View.Authorization.Login.LoginFragment
+import com.example.vendox.citytrack.Presentation.View.Authorization.Registration.FirstScreen.RegistrationFragment
 import com.example.vendox.citytrack.R
 
 
-class MainFragment: Fragment(){
+class WelcomeFragment: Fragment(){
     private lateinit var btnRegister: Button
     private lateinit var btnLogin: Button
 
     companion object {
-        fun newInstance(): MainFragment {
-            return MainFragment()
+        fun newInstance(): WelcomeFragment {
+            return WelcomeFragment()
         }
     }
 

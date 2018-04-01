@@ -1,13 +1,12 @@
-package com.example.vendox.citytrack
+package com.example.vendox.citytrack.Presentation.View
 
 import android.content.Intent
-import android.graphics.BitmapFactory
-import android.media.Image
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Handler
-import android.view.WindowManager
 import android.widget.ImageView
+import com.example.vendox.citytrack.Presentation.View.Authorization.LoginActivity
+import com.example.vendox.citytrack.R
 
 class SplashActivity : AppCompatActivity() {
     lateinit var backgroundView: ImageView

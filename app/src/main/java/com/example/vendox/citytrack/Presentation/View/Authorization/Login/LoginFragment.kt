@@ -1,4 +1,4 @@
-package com.example.vendox.citytrack.EnterFragment
+package com.example.vendox.citytrack.Presentation.View.Authorization.Login
 
 import android.app.Fragment
 import android.content.Intent
@@ -7,9 +7,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
-import android.widget.EditText
 import android.widget.Toast
-import com.example.vendox.citytrack.MapBoxActivity
+import com.example.vendox.citytrack.Presentation.View.Map.MapBoxActivity
 import com.example.vendox.citytrack.R
 import com.example.vendox.citytrack.Retrofit.Request.LoginRequest
 import com.example.vendox.citytrack.Retrofit.RetrofitClient
@@ -17,7 +16,6 @@ import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.Disposable
 import io.reactivex.schedulers.Schedulers
 
-import com.example.vendox.citytrack.MD5
 import com.facebook.login.widget.LoginButton
 import com.rengwuxian.materialedittext.MaterialEditText
 
