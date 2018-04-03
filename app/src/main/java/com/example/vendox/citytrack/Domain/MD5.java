@@ -1,4 +1,4 @@
-package com.example.vendox.citytrack;
+package com.example.vendox.citytrack.Domain;
 
 import java.math.BigInteger;
 import java.security.MessageDigest;

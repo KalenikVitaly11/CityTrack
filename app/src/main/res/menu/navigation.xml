@@ -3,25 +3,22 @@
 
     <item
         android:id="@+id/navigation_home"
-        android:icon="@mipmap/ic_library_books_black_24dp"
+        android:icon="@drawable/ic_users_e0e0e0"
         android:title="@string/title_home" />
 
     <item
         android:id="@+id/navigation_location"
-        android:icon="@mipmap/ic_my_location_black_24dp"
+        android:icon="@drawable/ic_route_e0e0e0"
         android:title="@string/title_dashboard" />
 
     <item
-        android:id="@+id/navigation_play"
-        android:icon="@mipmap/ic_play_arrow_black_24dp"
-        android:title="@string/title_notifications" />
-    <item
         android:id="@+id/navigation_social"
-        android:icon="@mipmap/ic_group_black_24dp"
+        android:icon="@drawable/ic_placeholder_e0e0e0"
         android:title="@string/title_notifications" />
+
     <item
         android:id="@+id/navigation_profile"
-        android:icon="@mipmap/ic_person_outline_black_24dp"
+        android:icon="@drawable/ic_users_e0e0e0"
         android:title="@string/title_notifications" />
 
 </menu>

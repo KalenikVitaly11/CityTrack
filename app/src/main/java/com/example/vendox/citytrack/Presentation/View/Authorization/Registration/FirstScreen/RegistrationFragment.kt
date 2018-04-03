@@ -1,6 +1,7 @@
 package com.example.vendox.citytrack.Presentation.View.Authorization.Registration.FirstScreen
 
 import android.app.Fragment
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -8,85 +9,113 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.Toast
+import com.example.vendox.citytrack.Data.RepositoryProvider
+import com.example.vendox.citytrack.Domain.DataClasses.Request.SocNetRegistrationRequest
+import com.example.vendox.citytrack.Domain.UseCases.RegisterUseCase
 import com.example.vendox.citytrack.Presentation.View.Authorization.Registration.SecondScreen.RegistrationFinishFragment
+import com.example.vendox.citytrack.Presentation.View.Map.MapBoxActivity
 import com.example.vendox.citytrack.R
-import com.example.vendox.citytrack.Retrofit.Request.RegisterRequest
-import com.example.vendox.citytrack.Retrofit.RetrofitClient
-import io.reactivex.android.schedulers.AndroidSchedulers
-import io.reactivex.disposables.Disposable
-import io.reactivex.schedulers.Schedulers
+import com.facebook.CallbackManager
+import com.facebook.FacebookCallback
+import com.facebook.FacebookException
+import com.facebook.login.LoginResult
+import com.facebook.login.widget.LoginButton
+import com.vk.sdk.VKAccessToken
+import com.vk.sdk.VKCallback
+import com.vk.sdk.VKSdk
+import com.vk.sdk.api.VKError
 
-/**
- * Created by vendox on 28.02.18.
- */
-class RegistrationFragment : Fragment() {
+class RegistrationFragment : Fragment(), RegistrationView {
 
-    private val client by lazy {
-        RetrofitClient.create()
-    }
-
-    var disposable: Disposable? = null
-
-    private lateinit var name: String
-    private lateinit var surname: String
-    private lateinit var email: String
-    private lateinit var password: String
     private lateinit var btnContinueReg: Button
+    private lateinit var btnRegistrationVk:Button
+    private lateinit var btnRegistrationFakeBtn:LoginButton
+    private lateinit var btnRegistrationFb:Button
+    private lateinit var presenter: RegistrationPresenter
+    private val callbackManager = CallbackManager.Factory.create()
 
-    companion object {
-
-        fun newInstance(): RegistrationFragment {
-            return RegistrationFragment()
-        }
-    }
 
     override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-
         val rootView = inflater?.inflate(R.layout.registration_fragment, container, false)
+        val registerUseCase = RegisterUseCase(RepositoryProvider.getAuthRepository())
+        presenter = RegistrationPresenter(this, registerUseCase)
 
-        btnContinueReg = rootView!!.findViewById<Button>(R.id.btn_continue_registration)
+        btnContinueReg = rootView!!.findViewById(R.id.btn_continue_registration)
+        btnContinueReg.setOnClickListener{ view ->
+            presenter.continueRegistration()
+        }
 
-        btnContinueReg.setOnClickListener(View.OnClickListener {
-            fragmentManager.beginTransaction()
-                    .setCustomAnimations(R.animator.slide_in_from_right, R.animator.disappear, R.animator.appear, R.animator.slide_out_to_right)
-                    .replace(R.id.fragment_container, RegistrationFinishFragment())
-                    .addToBackStack(null)
-                    .commit()
-        })
+        btnRegistrationVk = rootView!!.findViewById(R.id.btn_registration_vk)
+        btnRegistrationVk.setOnClickListener { view ->
+            VKSdk.login(this, *arrayOf())
+        }
+        btnRegistrationFakeBtn = rootView!!.findViewById(R.id.facebook_registration_fake_btn)
+        btnRegistrationFakeBtn.setReadPermissions("email", "public_profile")
+        btnRegistrationFakeBtn.setFragment(this)
 
-        //btnReg = rootView!!.findViewById<Button>(R.id.btn_reg)
-//
-        //btnReg.setOnClickListener(View.OnClickListener {
-//
-        //    name = rootView!!.findViewById<MaterialEditText>(R.id.registration_name).text.toString()
-        //    surname = rootView!!.findViewById<MaterialEditText>(R.id.registration_surname).text.toString()
-        //    email = rootView!!.findViewById<MaterialEditText>(R.id.registration_email).text.toString()
-        //    password = rootView!!.findViewById<MaterialEditText>(R.id.registration_password).text.toString()
-        //    password = MD5.convertPassMd5(password)
-        //    doRegister(RegisterRequest(name, surname, email, password))
-        //})
+        btnRegistrationFakeBtn.registerCallback(callbackManager, object: FacebookCallback<LoginResult>{
+            override fun onSuccess(result: LoginResult?) {
+                Log.d("myLogs", result.toString())
+                val registrationObject = SocNetRegistrationRequest("Vitaly", "Kalenik", "kvitaly21@yandex.ru", "id123123123", "null")
+                presenter.registerFb(registrationObject)
+            }
+
+            override fun onError(error: FacebookException?) {
+                registrationError()
+            }
+
+            override fun onCancel() {
+
+            }
+        });
+
+        btnRegistrationFb = rootView.findViewById(R.id.facebook_registration_btn)
+        btnRegistrationFb.setOnClickListener { view ->
+            btnRegistrationFakeBtn.performClick()
+        }
 
         return rootView
     }
 
+    override fun registrationSuccess() {
+        Toast.makeText(activity, "Успех", Toast.LENGTH_SHORT).show()
+        Log.d("myLogs", "Успех")
+    }
 
+    override fun registrationError() {
+        Toast.makeText(activity, "Ошибка", Toast.LENGTH_SHORT).show()
+        Log.d("myLogs", "Ошибка")
+    }
 
-    private fun doRegister(request: RegisterRequest) {
-        disposable = client.registration(request)
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(
-                        { result ->
-                            if (result.code() == 200) {
-                                //val intent = Intent(activity, LoginFragment::class.java)
-                                //startActivity(intent)
-                                Toast.makeText(activity, "Success", Toast.LENGTH_SHORT).show()
-                            } else Toast.makeText(activity, "Ooops", Toast.LENGTH_SHORT).show()
-                        },
-                        { error: Throwable ->
-                            error.printStackTrace()
-                            Log.d("myLogs", error.message)
-                            Toast.makeText(activity, "false", Toast.LENGTH_SHORT).show()
-                        })
+    override fun goToMap() {
+        val intent = Intent(activity, MapBoxActivity::class.java)
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK)
+        startActivity(intent)
+    }
+
+    override fun continueRegistration() {
+        fragmentManager.beginTransaction()
+                .setCustomAnimations(R.animator.slide_in_from_right, R.animator.disappear, R.animator.appear, R.animator.slide_out_to_right)
+                .replace(R.id.fragment_container, RegistrationFinishFragment())
+                .addToBackStack(null)
+                .commit()
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        if (!VKSdk.onActivityResult(requestCode, resultCode, data, object : VKCallback<VKAccessToken> {
+                    override fun onResult(res: VKAccessToken?) {
+                        Toast.makeText(activity, "Success", Toast.LENGTH_SHORT).show()
+                        val registrationObject = SocNetRegistrationRequest("Vitaly", "Kalenik", "kvitaly21@yandex.ru", "id123123123", "null")
+                        presenter.registerVk(registrationObject)
+                    }
+
+                    override fun onError(error: VKError?) {
+                        Toast.makeText(activity, "Error", Toast.LENGTH_SHORT).show()
+                    }
+
+                })) {
+            super.onActivityResult(requestCode, resultCode, data)
+        }
+        callbackManager.onActivityResult(requestCode, resultCode, data);
     }
 }

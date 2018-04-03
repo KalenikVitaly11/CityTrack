@@ -8,10 +8,10 @@
     <android.support.v7.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginBottom="58dp"
+        android:layout_marginBottom="38dp"
         android:layout_marginLeft="32dp"
         android:layout_marginRight="32dp"
-        android:layout_marginTop="62dp"
+        android:layout_marginTop="42dp"
         android:clipToPadding="false"
         app:cardBackgroundColor="@color/grey_424242_70"
         app:cardCornerRadius="4dp"
@@ -143,6 +143,7 @@
 
 
                     <Button
+                        android:id="@+id/btn_registration_vk"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="6dp"
@@ -155,12 +156,13 @@
                         android:textColor="@android:color/white" />
 
                     <com.facebook.login.widget.LoginButton
-                        android:id="@+id/facebook_registration_btn"
+                        android:id="@+id/facebook_registration_fake_btn"
                         android:layout_width="0dp"
                         android:layout_height="0dp"
                         android:visibility="gone" />
 
                     <Button
+                        android:id="@+id/facebook_registration_btn"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginBottom="8dp"

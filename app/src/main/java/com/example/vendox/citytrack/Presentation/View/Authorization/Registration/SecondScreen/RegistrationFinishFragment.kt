@@ -2,24 +2,24 @@ package com.example.vendox.citytrack.Presentation.View.Authorization.Registratio
 
 import android.os.Bundle
 import android.app.Fragment
+import android.content.Intent
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
 import android.widget.Toast
-import com.example.vendox.citytrack.Data.AuthApi
-import com.example.vendox.citytrack.Data.Repository.AuthRepository
-import com.example.vendox.citytrack.Data.Repository.AuthRepositoryImpl
 import com.example.vendox.citytrack.Data.RepositoryProvider
-import com.example.vendox.citytrack.Domain.DataClasses.Request.EmailRegistraion
+import com.example.vendox.citytrack.Domain.DataClasses.Request.EmailRegistration
 import com.example.vendox.citytrack.Domain.UseCases.RegisterUseCase
+import com.example.vendox.citytrack.Presentation.View.Map.MapBoxActivity
 
 import com.example.vendox.citytrack.R
-import io.reactivex.android.schedulers.AndroidSchedulers
-import io.reactivex.schedulers.Schedulers
 
 
 class RegistrationFinishFragment : Fragment(), RegistrationFinishView {
+
+    lateinit var registerBtn:Button
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
@@ -28,8 +28,12 @@ class RegistrationFinishFragment : Fragment(), RegistrationFinishView {
 
         val registerUseCase = RegisterUseCase(RepositoryProvider.getAuthRepository())
         val presenter = RegistrationFinishPresenter(this, registerUseCase)
-        val emailRegistraion = EmailRegistraion("Vitaly", "Kalenik", "kvitaly21@yandex.ru", "123123123")
-        presenter.register(emailRegistraion)
+
+        registerBtn = view.findViewById<Button>(R.id.btn_registration)
+        registerBtn.setOnClickListener({view ->
+            val emailRegistraion = EmailRegistration("Vitaly", "Kalenik", "kvitaly21@yandex.ru", "123123123")
+            presenter.registerEmail(emailRegistraion)
+        })
 
         return view
     }
@@ -42,5 +46,11 @@ class RegistrationFinishFragment : Fragment(), RegistrationFinishView {
     override fun registrationSuccess() {
         Toast.makeText(activity, "Успех", Toast.LENGTH_SHORT).show()
         Log.d("myLogs", "Успех")
+    }
+
+    override fun goToMap() {
+        val intent = Intent(activity, MapBoxActivity::class.java)
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK)
+        startActivity(intent)
     }
 }

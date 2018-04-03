@@ -25,12 +25,12 @@ class WelcomeFragment: Fragment(){
                               savedInstanceState: Bundle?): View? {
         val rootView = inflater?.inflate(R.layout.main_fragment, container, false)
 
-        btnLogin = rootView!!.findViewById<Button>(R.id.enter_button)
+        btnLogin = rootView!!.findViewById<Button>(R.id.go_to_login_button)
         btnLogin.setOnClickListener(View.OnClickListener {
             goToLogin()
         })
 
-        btnRegister = rootView!!.findViewById<Button>(R.id.registration_button)
+        btnRegister = rootView!!.findViewById<Button>(R.id.go_to_registration_button)
         btnRegister.setOnClickListener(View.OnClickListener {
             goToRegister()
         })

@@ -123,6 +123,7 @@
 
 
                     <Button
+                        android:id="@+id/btn_login_vk"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="6dp"
@@ -135,12 +136,13 @@
                         android:textColor="@android:color/white" />
 
                     <com.facebook.login.widget.LoginButton
-                        android:id="@+id/facebook_login_btn"
+                        android:id="@+id/btn_login_fb_fake"
                         android:layout_width="0dp"
                         android:layout_height="0dp"
                         android:visibility="gone" />
 
                     <Button
+                        android:id="@+id/btn_login_fb"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginBottom="8dp"

@@ -1,4 +1,4 @@
-package com.example.vendox.citytrack
+package com.example.vendox.citytrack.Domain
 
 import android.app.Application
 import com.facebook.FacebookSdk

@@ -42,7 +42,7 @@
 
 
         <Button
-            android:id="@+id/enter_button"
+            android:id="@+id/go_to_login_button"
             android:layout_width="300dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
@@ -56,7 +56,7 @@
             android:textSize="18sp" />
 
         <Button
-            android:id="@+id/registration_button"
+            android:id="@+id/go_to_registration_button"
             android:layout_width="300dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"

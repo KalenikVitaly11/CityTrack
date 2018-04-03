@@ -6,4 +6,5 @@ package com.example.vendox.citytrack.Presentation.View.Authorization.Registratio
 interface RegistrationFinishView {
     fun registrationSuccess()
     fun registrationError()
+    fun goToMap()
 }
