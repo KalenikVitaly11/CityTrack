@@ -98,7 +98,7 @@ class MapFragment: Fragment(), com.example.vendox.citytrack.Presentation.View.Ma
                         .include(LatLng(55.7499363, 37.9918402))// Southwest
                         .build()
                     mapboxMap.setLatLngBoundsForCameraTarget(bounds)
-                
+
                 map = mapboxMap
                 enableLocationPlugin()
 
