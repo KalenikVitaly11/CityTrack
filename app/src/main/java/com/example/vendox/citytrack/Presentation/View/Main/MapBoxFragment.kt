@@ -1,4 +1,4 @@
-package com.example.vendox.citytrack.Presentation.View.Map
+package com.example.vendox.citytrack.Presentation.View.Main
 
 import android.app.Fragment
 import android.os.Bundle
@@ -43,7 +43,7 @@ import retrofit2.Callback
 import retrofit2.Response
 
 
-class MapBoxFragment: Fragment(), LocationEngineListener, PermissionsListener {
+class MapBoxFragment : Fragment(), LocationEngineListener, PermissionsListener {
     lateinit private var mapView: MapView
 
 
@@ -85,8 +85,8 @@ class MapBoxFragment: Fragment(), LocationEngineListener, PermissionsListener {
 
         val startButton: Button = rootView.findViewById(R.id.startButton)
         startButton.setOnClickListener(View.OnClickListener {
-            Log.i("text", ""+ startButton.text)
-            if (i > 0 ){
+            Log.i("text", "" + startButton.text)
+            if (i > 0) {
                 stopTracking()
                 startButton.text = "Start"
                 i = 0
@@ -98,7 +98,7 @@ class MapBoxFragment: Fragment(), LocationEngineListener, PermissionsListener {
 
         })
 
-        mapView.getMapAsync(object: OnMapReadyCallback{
+        mapView.getMapAsync(object : OnMapReadyCallback {
             override fun onMapReady(mapboxMap: MapboxMap) {
                 map = mapboxMap
                 enableLocationPlugin()
@@ -107,10 +107,10 @@ class MapBoxFragment: Fragment(), LocationEngineListener, PermissionsListener {
         return rootView
     }
 
-    @SuppressWarnings( "MissingPermission")
-    fun enableLocationPlugin(){
+    @SuppressWarnings("MissingPermission")
+    fun enableLocationPlugin() {
 
-        if (PermissionsManager.areLocationPermissionsGranted(activity)){
+        if (PermissionsManager.areLocationPermissionsGranted(activity)) {
             initializeLocationEngine()
 
             locationPlugin = map?.let { LocationLayerPlugin(mapView, it, locationEngine) }
@@ -122,7 +122,7 @@ class MapBoxFragment: Fragment(), LocationEngineListener, PermissionsListener {
 
     }
 
-    @SuppressWarnings( "MissingPermission")
+    @SuppressWarnings("MissingPermission")
     fun initializeLocationEngine() {
         locationEngine = LostLocationEngine(activity)
         locationEngine!!.priority = LocationEnginePriority.HIGH_ACCURACY
@@ -138,7 +138,7 @@ class MapBoxFragment: Fragment(), LocationEngineListener, PermissionsListener {
         }
     }
 
-    fun setCameraPosition(location: Location){
+    fun setCameraPosition(location: Location) {
         map!!.animateCamera(CameraUpdateFactory.newLatLngZoom(
                 LatLng(location.latitude, location.longitude), 13.0))
     }
@@ -163,11 +163,11 @@ class MapBoxFragment: Fragment(), LocationEngineListener, PermissionsListener {
     }
 
     override fun onLocationChanged(location: Location?) {
-        if (location != null){
+        if (location != null) {
             originLocation = location
             setCameraPosition(location)
             locationEngine!!.removeLocationEngineListener(this)
-            Log.e("Mapbox", "" +location.latitude + location.longitude )
+            Log.e("Mapbox", "" + location.latitude + location.longitude)
         }
     }
 
@@ -181,6 +181,7 @@ class MapBoxFragment: Fragment(), LocationEngineListener, PermissionsListener {
 
     override fun onResume() {
         super.onResume()
+        (activity as MainActivity).setActionBarTitle("Карта")
         mapView.onResume()
     }
 
@@ -210,7 +211,7 @@ class MapBoxFragment: Fragment(), LocationEngineListener, PermissionsListener {
         mapView.onSaveInstanceState(outState)
     }
 
-    fun startTracking(){
+    fun startTracking() {
 
 
         var i = 0
@@ -219,7 +220,7 @@ class MapBoxFragment: Fragment(), LocationEngineListener, PermissionsListener {
         val trackingDistance: Float = 0F;
         val trackingAccuracy: LocationAccuracy = LocationAccuracy.MEDIUM;
 
-        val builder= LocationParams.Builder()
+        val builder = LocationParams.Builder()
                 .setAccuracy(trackingAccuracy)
                 .setDistance(trackingDistance)
                 .setInterval(mLocTrackingInterval)
@@ -232,17 +233,17 @@ class MapBoxFragment: Fragment(), LocationEngineListener, PermissionsListener {
                 .start(object : OnLocationUpdatedListener {
                     override fun onLocationUpdated(location: Location) {
                         originLocation = location
-                        Log.i("smartLocation", "" +originLocation!!.longitude +", "+ originLocation!!.latitude)
-                        if (i >27) {
+                        Log.i("smartLocation", "" + originLocation!!.longitude + ", " + originLocation!!.latitude)
+                        if (i > 27) {
                             stopTracking()
                             Toast.makeText(activity, "Ooops", Toast.LENGTH_SHORT).show()
                         }
-                        if (i == 0){
+                        if (i == 0) {
                             originPosition = Point.fromLngLat(originLocation!!.longitude, originLocation!!.latitude)
                             originPosition?.let { way.add(it) }
                         }
-                        if (i > 0){
-                            if (i > 26){
+                        if (i > 0) {
+                            if (i > 26) {
                                 destinationPosition = Point.fromLngLat(originLocation!!.longitude, originLocation!!.latitude)
                                 destinationPosition?.let { way.add(it) }
                                 getRoute(originPosition!!, destinationPosition!!)
@@ -254,13 +255,14 @@ class MapBoxFragment: Fragment(), LocationEngineListener, PermissionsListener {
 
 
                         }
-                        i ++
+                        i++
                     }
 
 
                 })
     }
-    fun stopTracking(){
+
+    fun stopTracking() {
         SmartLocation.with(activity)
                 .location()
                 .stop()
@@ -269,7 +271,7 @@ class MapBoxFragment: Fragment(), LocationEngineListener, PermissionsListener {
                 .stop()
     }
 
-    fun getRoute(origin: Point , destination: Point){
+    fun getRoute(origin: Point, destination: Point) {
 
         val builder = NavigationRoute.builder()
                 .accessToken(Mapbox.getAccessToken())
@@ -277,13 +279,13 @@ class MapBoxFragment: Fragment(), LocationEngineListener, PermissionsListener {
                 .origin(origin)
                 .destination(destination)
 
-        for (p in waypoints){
+        for (p in waypoints) {
             builder.addWaypoint(p)
         }
         builder.build()
                 .getRoute(object : Callback<DirectionsResponse> {
                     override fun onFailure(call: Call<DirectionsResponse>?, t: Throwable) {
-                        Log.e(FeedbackBottomSheet.TAG, "Error: "+ t.printStackTrace() );
+                        Log.e(FeedbackBottomSheet.TAG, "Error: " + t.printStackTrace());
                     }
 
                     override fun onResponse(call: Call<DirectionsResponse>?, response: Response<DirectionsResponse>?) {
@@ -310,7 +312,6 @@ class MapBoxFragment: Fragment(), LocationEngineListener, PermissionsListener {
 
 
     }
-
 
 
 }

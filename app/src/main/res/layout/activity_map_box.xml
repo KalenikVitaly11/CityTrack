@@ -5,11 +5,12 @@
     android:id="@+id/container"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.example.vendox.citytrack.Presentation.View.Map.MapBoxActivity">
+    tools:context="com.example.vendox.citytrack.Presentation.View.Main.MainActivity">
 
     <FrameLayout
         android:layout_height="match_parent"
         android:layout_width="match_parent"
+        android:layout_marginBottom="50dp"
         android:id="@+id/rootmap"/>
 
     <com.ittianyu.bottomnavigationviewex.BottomNavigationViewEx
@@ -17,7 +18,7 @@
         android:layout_width="0dp"
         android:layout_height="50dp"
         android:background="@color/grey_424242"
-        app:itemIconTint="#e0e0e0"
+        app:itemIconTint="@drawable/bottom_nav_bar_item"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
