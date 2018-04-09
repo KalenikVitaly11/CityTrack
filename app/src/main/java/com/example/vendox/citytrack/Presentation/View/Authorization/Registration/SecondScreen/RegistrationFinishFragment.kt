@@ -12,7 +12,7 @@ import android.widget.Toast
 import com.example.vendox.citytrack.Data.RepositoryProvider
 import com.example.vendox.citytrack.Domain.DataClasses.Request.EmailRegistration
 import com.example.vendox.citytrack.Domain.UseCases.RegisterUseCase
-import com.example.vendox.citytrack.Presentation.View.Main.MainActivity
+import com.example.vendox.citytrack.Presentation.View.Main.MapBoxActivity
 
 import com.example.vendox.citytrack.R
 
@@ -49,7 +49,7 @@ class RegistrationFinishFragment : Fragment(), RegistrationFinishView {
     }
 
     override fun goToMap() {
-        val intent = Intent(activity, MainActivity::class.java)
+        val intent = Intent(activity, MapBoxActivity::class.java)
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK)
         startActivity(intent)
     }

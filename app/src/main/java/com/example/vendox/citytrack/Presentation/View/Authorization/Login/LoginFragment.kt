@@ -1,6 +1,5 @@
 package com.example.vendox.citytrack.Presentation.View.Authorization.Login
 
-import android.app.ActionBar
 import android.app.Fragment
 import android.content.Intent
 import android.graphics.Rect
@@ -15,7 +14,7 @@ import com.example.vendox.citytrack.Data.RepositoryProvider
 import com.example.vendox.citytrack.Domain.DataClasses.Request.EmailRegistration
 import com.example.vendox.citytrack.Domain.DataClasses.Request.SocNetRegistrationRequest
 import com.example.vendox.citytrack.Domain.UseCases.RegisterUseCase
-import com.example.vendox.citytrack.Presentation.View.Main.MainActivity
+import com.example.vendox.citytrack.Presentation.View.Main.MapBoxActivity
 import com.example.vendox.citytrack.R
 import com.facebook.CallbackManager
 import com.facebook.FacebookCallback
@@ -148,7 +147,7 @@ class LoginFragment : Fragment(), LoginView {
     }
 
     override fun goToMap() {
-        val intent = Intent(activity, MainActivity::class.java)
+        val intent = Intent(activity, MapBoxActivity::class.java)
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK)
         startActivity(intent)
     }

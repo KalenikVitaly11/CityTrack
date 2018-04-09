@@ -25,7 +25,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:layoutManager="LinearLayoutManager"
-            tools:context=".Presentation.View.Main.MainActivity"
+            tools:context=".Presentation.View.Main.MapBoxActivity"
             tools:listitem="@layout/cardview_friends_in_citytrack" />
 
         <TextView
@@ -44,7 +44,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:layoutManager="LinearLayoutManager"
-            tools:context=".Presentation.View.Main.MainActivity"
+            tools:context=".Presentation.View.Main.MapBoxActivity"
             tools:listitem="@layout/cardview_friends_to_invite" />
 
     </LinearLayout>
