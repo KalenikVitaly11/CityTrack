@@ -182,10 +182,10 @@ class MapFragment: Fragment(), com.example.vendox.citytrack.Presentation.View.Ma
                 context.getSystemService(
                         Context.NOTIFICATION_SERVICE) as NotificationManager
 
-        createNotificationChannel(
-                "com.example.vendox.citytrack.Presentation.View.Map",
-                "NotifyDemo News",
-                "Example News Channel")
+//        createNotificationChannel(
+//                "com.example.vendox.citytrack.Presentation.View.Map",
+//                "NotifyDemo News",
+//                "Example News Channel")
 
 
 
@@ -270,6 +270,7 @@ class MapFragment: Fragment(), com.example.vendox.citytrack.Presentation.View.Ma
             locationEngine?.addLocationEngineListener(this)
         }
     }
+
 
     override fun setCameraPosition(location: Location) {
         adapter.offer {
@@ -463,9 +464,11 @@ class MapFragment: Fragment(), com.example.vendox.citytrack.Presentation.View.Ma
             sendNotification()
         }
 
+        @RequiresApi(Build.VERSION_CODES.O)
         override fun onPostExecute(result: String?) {
             super.onPostExecute(result)
-            // ...
+            notificationManager = context.applicationContext.getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager?
+            notificationManager?.cancel(101)
         }
     }
 
@@ -474,38 +477,41 @@ class MapFragment: Fragment(), com.example.vendox.citytrack.Presentation.View.Ma
 
 
 
-    @RequiresApi(Build.VERSION_CODES.O)
-    private fun createNotificationChannel(id: String, name: String,
-                                          description: String) {
-
-        val importance = NotificationManager.IMPORTANCE_LOW
-        val channel = NotificationChannel(id, name, importance)
-
-        channel.description = description
-        channel.enableLights(true)
-        channel.lightColor = Color.RED
-        channel.enableVibration(false)
-        notificationManager?.createNotificationChannel(channel)
-    }
+//    @RequiresApi(Build.VERSION_CODES.O)
+//    private fun createNotificationChannel(id: String, name: String,
+//                                          description: String) {
+//
+//        val importance = NotificationManager.IMPORTANCE_LOW
+//        val channel = NotificationChannel(id, name, importance)
+//
+//        channel.description = description
+//        channel.enableLights(true)
+//        channel.lightColor = Color.RED
+//        channel.enableVibration(false)
+//        notificationManager?.createNotificationChannel(channel)
+//    }
 
     @RequiresApi(Build.VERSION_CODES.O)
     private fun sendNotification() {
 
         val notificationID = 101
 
-        val channelID = "com.example.vendox.citytrack.Presentation.View.Map"
+//        val channelID = "com.example.vendox.citytrack.Presentation.View.Map"
 
-        val notification = Notification.Builder(this.context,
-                channelID)
-                .setContentTitle("Example Notification")
-                .setContentText("This is an  example notification.")
-                .setSmallIcon(R.drawable.ic_arrow_up)
-                .setLargeIcon(BitmapFactory.decodeResource(getResources(),
-                        R.drawable.logo))
-                .setChannelId(channelID)
+        val notification = Notification.Builder(this.context)
+                .setContentTitle("CityTrack")
+                .setContentText("Track is running")
+                .setSmallIcon(R.drawable.logo)
+                .setAutoCancel(false)
+                .setWhen(System.currentTimeMillis())
+//                .setLargeIcon(BitmapFactory.decodeResource(getResources(),
+//                        R.drawable.logo))
                 .build()
 
         notificationManager?.notify(notificationID, notification)
+    }
+    private fun cancelNotification(){
+
     }
 
 
