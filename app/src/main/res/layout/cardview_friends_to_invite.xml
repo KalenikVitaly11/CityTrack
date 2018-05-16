@@ -24,6 +24,7 @@
             android:fontFamily="sans-serif"
             android:text="Имя Фамилия"
             android:textColor="@color/grey_424242"
+            android:layout_marginBottom="8dp"
             android:textSize="16sp" />
 
         <ImageView
@@ -36,6 +37,7 @@
             android:background="@color/com_facebook_blue" />
 
         <TextView
+            android:id="@+id/friend_cardview_network_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@id/friend_cardview_user_name"

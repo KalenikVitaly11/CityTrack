@@ -11,7 +11,6 @@ import android.widget.Button
 import android.widget.LinearLayout
 import android.widget.Toast
 import com.example.vendox.citytrack.Data.RepositoryProvider
-import com.example.vendox.citytrack.Domain.DataClasses.Request.EmailRegistration
 import com.example.vendox.citytrack.Domain.DataClasses.Request.SocNetRegistrationRequest
 import com.example.vendox.citytrack.Domain.UseCases.RegisterUseCase
 import com.example.vendox.citytrack.Presentation.View.Main.MapBoxActivity
@@ -28,6 +27,9 @@ import com.vk.sdk.VKCallback
 import com.vk.sdk.VKSdk
 import com.vk.sdk.api.VKError
 import android.widget.TextView
+import com.example.vendox.citytrack.Domain.DataClasses.Request.EmailLogin
+import com.example.vendox.citytrack.Domain.UseCases.LoginUseCase
+import com.example.vendox.citytrack.Presentation.View.Authorization.ForgotPassword.SendEmail.SendEmailFragment
 
 
 /**
@@ -54,13 +56,15 @@ class LoginFragment : Fragment(), LoginView {
         val view = inflater?.inflate(R.layout.login_fragment, container, false)
 
         val registerUseCase = RegisterUseCase(RepositoryProvider.getAuthRepository())
-        presenter = LoginPresenter(this, registerUseCase)
+        val loginUseCase = LoginUseCase(RepositoryProvider.getAuthRepository())
+
+        presenter = LoginPresenter(this, registerUseCase, loginUseCase)
 
 
         btnLogin = view!!.findViewById(R.id.btn_login)
         btnLogin.setOnClickListener { view ->
-            val emailRegistraion = EmailRegistration("Vitaly", "Kalenik", "kvitaly21@yandex.ru", "123123123")
-            presenter.registerEmail(emailRegistraion)
+            val emailLogin = EmailLogin("kvitaly21@yandex.ru", "123123123")
+            presenter.loginEmail(emailLogin)
         }
 
         btnLoginVk = view!!.findViewById(R.id.btn_login_vk)
@@ -95,6 +99,7 @@ class LoginFragment : Fragment(), LoginView {
 
         tvAgreement = view.findViewById(R.id.tv_login_agreement)
         tvForgotPassword = view.findViewById(R.id.tv_login_forgot_password)
+        tvForgotPassword.setOnClickListener { forgotPassword() }
 
         cardviewLogin = view.findViewById(R.id.login_cardview)
 
@@ -106,7 +111,6 @@ class LoginFragment : Fragment(), LoginView {
 
             val heightDiff = view.rootView.height - (r.bottom - r.top)
             if (heightDiff > 500) { // if more than 100 pixels, its probably a keyboard...
-                Log.d("myLogs", "Фокус");
                 val params = LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT)
                 params.bottomMargin = 40
                 tvAgreement.layoutParams = params
@@ -117,7 +121,6 @@ class LoginFragment : Fragment(), LoginView {
                 tvForgotPassword.visibility = View.GONE
                 cardviewLogin.layoutParams.height = WindowManager.LayoutParams.WRAP_CONTENT
             } else {
-                Log.d("myLogs", "Расфокус");
                 val params = LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT)
                 params.bottomMargin = 0
                 tvAgreement.layoutParams = params
@@ -135,6 +138,13 @@ class LoginFragment : Fragment(), LoginView {
         return view
     }
 
+    override fun forgotPassword() {
+        fragmentManager.beginTransaction()
+                .setCustomAnimations(R.animator.slide_in_from_right, R.animator.disappear, R.animator.appear, R.animator.slide_out_to_right)
+                .replace(R.id.fragment_container, SendEmailFragment())
+                .addToBackStack(null)
+                .commit()
+    }
 
     override fun registrationSuccess() {
         Toast.makeText(activity, "Успех", Toast.LENGTH_SHORT).show()

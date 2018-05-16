@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "267574916317",
+    "firebase_url": "https://citytrack-f311c.firebaseio.com",
+    "project_id": "citytrack-f311c",
+    "storage_bucket": "citytrack-f311c.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:267574916317:android:cc6c9e70f5dc3550",
+        "android_client_info": {
+          "package_name": "com.example.vendox.citytrack"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "267574916317-rkjtj7b6odb7rea7v2gig2ui8hp7eid6.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB37Bk-XeE51zFlyxhQLJijLZ6vZoJkxe4"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

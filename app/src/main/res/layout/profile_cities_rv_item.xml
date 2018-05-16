@@ -10,6 +10,7 @@
         android:background="@color/grey_424242" />
 
     <TextView
+        android:id="@+id/rv_cities_city"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerInParent="true"

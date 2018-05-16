@@ -1,6 +1,8 @@
 package com.example.vendox.citytrack.Data
 
+import com.example.vendox.citytrack.Domain.DataClasses.Request.EmailLogin
 import com.example.vendox.citytrack.Domain.DataClasses.Request.EmailRegistration
+import com.example.vendox.citytrack.Domain.DataClasses.Request.ForgotPasswordObject
 import com.example.vendox.citytrack.Domain.DataClasses.Request.SocNetRegistrationRequest
 import com.example.vendox.citytrack.Domain.DataClasses.Response.SocNetRegistrationResponse
 import io.reactivex.Observable
@@ -18,14 +20,25 @@ interface AuthApi {
     @POST("/register")
     fun registerEmail(@Body body: EmailRegistration): Observable<ResponseBody>
 
+    @POST("/login")
+    fun loginEmail(@Body body: EmailLogin): Observable<Response<ResponseBody>>
+
     @POST("/networks")
     fun registerSocialNetwork(@Body body:SocNetRegistrationRequest): Observable<Response<SocNetRegistrationResponse>>
 
+    @POST("/pass-reset/sendemail")
+    fun sendEmail(@Body body: ForgotPasswordObject): Observable<ResponseBody>
+
+    @POST("/pass-reset/codeconfirm")
+    fun sendCode(@Body body: ForgotPasswordObject): Observable<ResponseBody>
+
+    @POST("/changepass")
+    fun sendNewPassword(@Body body: EmailLogin): Observable<ResponseBody>
 
     companion object {
         fun create(): AuthApi {
             val retrofit = Retrofit.Builder()
-                    .baseUrl("https://private-08661-citytrack.apiary-mock.com/")
+                    .baseUrl("http://citytrack.online/")
                     .addConverterFactory(GsonConverterFactory.create())
                     .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
                     .build()

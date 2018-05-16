@@ -4,10 +4,15 @@ import android.content.Intent
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Handler
+import android.util.Log
 import android.view.WindowManager
 import android.widget.ImageView
+import com.crashlytics.android.Crashlytics
 import com.example.vendox.citytrack.Presentation.View.Authorization.LoginActivity
 import com.example.vendox.citytrack.R
+import com.vk.sdk.util.VKUtil
+
+
 
 class SplashActivity : AppCompatActivity() {
     lateinit var backgroundView: ImageView
@@ -16,7 +21,6 @@ class SplashActivity : AppCompatActivity() {
         setContentView(R.layout.activity_splash)
         supportActionBar!!.hide()
         window.setFlags(WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS, WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS)
-
         Handler().postDelayed({
             val intent = Intent(this, LoginActivity::class.java)
             startActivity(intent)

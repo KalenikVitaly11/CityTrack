@@ -2,8 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/.idea/CityTracker.iml" filepath="$PROJECT_DIR$/.idea/CityTracker.iml" />
-      <module fileurl="file://C:\Users\Vitaly\AndroidStudioProjects\CityTracker\MapFragmentRealese.iml" filepath="C:\Users\Vitaly\AndroidStudioProjects\CityTracker\MapFragmentRealese.iml" />
+      <module fileurl="file://$PROJECT_DIR$/CityTracker.iml" filepath="$PROJECT_DIR$/CityTracker.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
     </modules>
   </component>

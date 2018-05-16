@@ -7,4 +7,5 @@ interface LoginView {
     fun registrationSuccess()
     fun registrationError()
     fun goToMap()
+    fun forgotPassword()
 }

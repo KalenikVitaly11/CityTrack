@@ -12,14 +12,17 @@
     <string name="city_track">CityTrack</string>
 
     <string name="log_in">Войти</string>
+    <string name="send">Отправить</string>
     <string name="sign_up">Зарегистрироваться</string>
     <string name="registration">Регистрация</string>
     <string name="enter">Вход</string>
+    <string name="password_restore">Восстановление</string>
 
     <string name="name">Имя</string>
     <string name="surname">Фамилия</string>
     <string name="birth_date">Дата рождения</string>
     <string name="email">Email</string>
+    <string name="code">Код</string>
     <string name="reg_password">Пароль</string>
     <string name="reg_social_networks">или используя один из сервисов</string>
     <string name="forgot_password">Забыли пароль?</string>

@@ -312,7 +312,6 @@
                     android:id="@+id/profile_rv_cities"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    app:layoutManager="LinearLayoutManager"
                     tools:context=".Presentation.View.Main.MapBoxActivity"
                     tools:listitem="@layout/profile_cities_rv_item" />
 

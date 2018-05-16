@@ -14,6 +14,7 @@ import com.example.vendox.citytrack.Data.Repository.GetRoute
 import com.example.vendox.citytrack.Data.Repository.Route
 import com.example.vendox.citytrack.Data.RepositoryProvider
 import com.example.vendox.citytrack.Domain.UseCases.MapboxUseCase
+import com.example.vendox.citytrack.Presentation.View.Main.MapBoxActivity
 import com.example.vendox.citytrack.R
 import com.mapbox.api.directions.v5.models.DirectionsRoute
 import com.mapbox.geojson.Point
@@ -124,6 +125,7 @@ class MapFragment: Fragment(), com.example.vendox.citytrack.Presentation.View.Ma
 
     override fun onResume() {
         super.onResume()
+        (activity as MapBoxActivity).setActionBarTitle("Карта")
         mapView?.onResume()
     }
 
