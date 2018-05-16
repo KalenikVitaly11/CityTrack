@@ -2,18 +2,20 @@ package com.example.vendox.citytrack.Presentation.View.Authorization.Registratio
 
 import android.app.Fragment
 import android.content.Intent
+import android.graphics.Rect
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
+import android.widget.TextView
 import android.widget.Toast
 import com.example.vendox.citytrack.Data.RepositoryProvider
 import com.example.vendox.citytrack.Domain.DataClasses.Request.SocNetRegistrationRequest
 import com.example.vendox.citytrack.Domain.UseCases.RegisterUseCase
 import com.example.vendox.citytrack.Presentation.View.Authorization.Registration.SecondScreen.RegistrationFinishFragment
-import com.example.vendox.citytrack.Presentation.View.Map.MapBoxActivity
+import com.example.vendox.citytrack.Presentation.View.Main.MapBoxActivity
 import com.example.vendox.citytrack.R
 import com.facebook.CallbackManager
 import com.facebook.FacebookCallback
@@ -32,6 +34,8 @@ class RegistrationFragment : Fragment(), RegistrationView {
     private lateinit var btnRegistrationFakeBtn:LoginButton
     private lateinit var btnRegistrationFb:Button
     private lateinit var presenter: RegistrationPresenter
+    private lateinit var tvTitle: TextView
+    private lateinit var tvAgreement: TextView
     private val callbackManager = CallbackManager.Factory.create()
 
 
@@ -73,6 +77,30 @@ class RegistrationFragment : Fragment(), RegistrationView {
         btnRegistrationFb.setOnClickListener { view ->
             btnRegistrationFakeBtn.performClick()
         }
+
+        tvTitle = rootView.findViewById(R.id.registration_title)
+        tvAgreement = rootView.findViewById(R.id.tv_registration_agreement)
+
+        rootView.viewTreeObserver.addOnGlobalLayoutListener {
+            val r = Rect()
+            //r will be populated with the coordinates of your view that area still visible.
+            rootView.getWindowVisibleDisplayFrame(r)
+
+            val heightDiff = rootView.rootView.height - (r.bottom - r.top)
+            if (heightDiff > 500) { // if more than 100 pixels, its probably a keyboard...
+                Log.d("myLogs", "Фокус")
+                tvAgreement.setText("Авторизуясь, вы принимаете условия пользовательского соглашения. Подробнее можно ознакомиться здесь.")
+                btnRegistrationVk.visibility = View.GONE
+                btnRegistrationFb.visibility = View.GONE
+
+            } else {
+                Log.d("myLogs", "Расфокус")
+                tvAgreement.setText("Или используя один из сервисов")
+                btnRegistrationVk.visibility = View.VISIBLE
+                btnRegistrationFb.visibility = View.VISIBLE
+            }
+        }
+
 
         return rootView
     }

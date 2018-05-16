@@ -3,7 +3,7 @@
     <string name="app_name">CityTrack</string>
     <string name="access_token" translatable="false">pk.eyJ1IjoidmVoZG94IiwiYSI6ImNqZHQ0aHVxZTBsaHkycHQzZzBub2lkaHoifQ.lnmvOCQjmaDSxW-NSuJyKA</string>
     <string name="title_activity_map_box">MapBoxActivity</string>
-    <string name="title_home">Home</string>
+    <string name="title_home">Friends</string>
     <string name="title_dashboard">Dashboard</string>
     <string name="title_notifications">Notifications</string>
     <string name="login">user@email.com</string>

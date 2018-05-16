@@ -12,7 +12,7 @@ import android.widget.Toast
 import com.example.vendox.citytrack.Data.RepositoryProvider
 import com.example.vendox.citytrack.Domain.DataClasses.Request.EmailRegistration
 import com.example.vendox.citytrack.Domain.UseCases.RegisterUseCase
-import com.example.vendox.citytrack.Presentation.View.Map.MapBoxActivity
+import com.example.vendox.citytrack.Presentation.View.Main.MapBoxActivity
 
 import com.example.vendox.citytrack.R
 
