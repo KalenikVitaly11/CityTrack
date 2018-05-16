@@ -1,6 +1,10 @@
 package com.example.vendox.citytrack.Data.Repository
 
 import android.util.Log
+import com.example.vendox.citytrack.Domain.UseCases.MapboxUseCase
+import com.example.vendox.citytrack.Presentation.View.Map.MapFragment
+import com.example.vendox.citytrack.Presentation.View.Map.MapPresenter
+import com.example.vendox.citytrack.Presentation.View.Map.MapView
 import com.mapbox.api.directions.v5.models.DirectionsResponse
 import com.mapbox.api.directions.v5.models.DirectionsRoute
 import com.mapbox.geojson.Point
@@ -15,8 +19,8 @@ import retrofit2.Response
 /**
  * Created by vehdox on 05.04.18.
  */
-class GetRoute: Route {
-    override fun getRoute(origin: Point, destination: Point) {
+class GetRoute{
+    fun getRoute(origin: Point, destination: Point) {
         val builder = NavigationRoute.builder()
                 .accessToken(Mapbox.getAccessToken())
                 .profile(DirectionsCriteria.PROFILE_WALKING)
@@ -41,6 +45,8 @@ class GetRoute: Route {
                         }
 
                         val currentRoute: DirectionsRoute = response.body()!!.routes().get(0)
+                        MapFragment().drawPolyline(currentRoute)
+
                     }
 
                 })
