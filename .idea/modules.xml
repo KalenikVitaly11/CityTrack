@@ -3,6 +3,8 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/CityTracker.iml" filepath="$PROJECT_DIR$/CityTracker.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/CityTracker.iml" filepath="$PROJECT_DIR$/.idea/CityTracker.iml" />
+      <module fileurl="file://$PROJECT_DIR$/MapFragmentRealese.iml" filepath="$PROJECT_DIR$/MapFragmentRealese.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
     </modules>
   </component>

@@ -5,6 +5,7 @@ import com.example.vendox.citytrack.Domain.DataClasses.Request.EmailLogin
 import com.example.vendox.citytrack.Domain.DataClasses.Request.EmailRegistration
 import com.example.vendox.citytrack.Domain.DataClasses.Request.ForgotPasswordObject
 import com.example.vendox.citytrack.Domain.DataClasses.Request.SocNetRegistrationRequest
+import com.example.vendox.citytrack.Domain.DataClasses.Response.EmailLoginResponse
 import com.example.vendox.citytrack.Domain.DataClasses.Response.SocNetRegistrationResponse
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
@@ -16,6 +17,12 @@ import retrofit2.Response
 class AuthRepositoryImpl : AuthRepository {
     override fun registerEmail(registrationObject: EmailRegistration): Observable<ResponseBody> {
         return AuthApi.create().registerEmail(registrationObject)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+    }
+
+    override fun loginEmail(loginObject: EmailLogin): Observable<Response<EmailLoginResponse>> {
+        return AuthApi.create().loginEmail(loginObject)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
     }

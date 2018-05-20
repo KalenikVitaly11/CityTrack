@@ -4,6 +4,7 @@ import com.example.vendox.citytrack.Domain.DataClasses.Request.EmailLogin
 import com.example.vendox.citytrack.Domain.DataClasses.Request.EmailRegistration
 import com.example.vendox.citytrack.Domain.DataClasses.Request.ForgotPasswordObject
 import com.example.vendox.citytrack.Domain.DataClasses.Request.SocNetRegistrationRequest
+import com.example.vendox.citytrack.Domain.DataClasses.Response.EmailLoginResponse
 import com.example.vendox.citytrack.Domain.DataClasses.Response.SocNetRegistrationResponse
 import io.reactivex.Observable
 import okhttp3.ResponseBody
@@ -20,9 +21,6 @@ interface AuthApi {
     @POST("/register")
     fun registerEmail(@Body body: EmailRegistration): Observable<ResponseBody>
 
-    @POST("/login")
-    fun loginEmail(@Body body: EmailLogin): Observable<Response<ResponseBody>>
-
     @POST("/networks")
     fun registerSocialNetwork(@Body body:SocNetRegistrationRequest): Observable<Response<SocNetRegistrationResponse>>
 
@@ -34,6 +32,9 @@ interface AuthApi {
 
     @POST("/changepass")
     fun sendNewPassword(@Body body: EmailLogin): Observable<ResponseBody>
+    @POST("/login")
+    fun loginEmail(@Body body: EmailLogin):Observable<Response<EmailLoginResponse>>
+
 
     companion object {
         fun create(): AuthApi {

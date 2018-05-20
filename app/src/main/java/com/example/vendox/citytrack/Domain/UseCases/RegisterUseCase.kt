@@ -9,18 +9,17 @@ import okhttp3.ResponseBody
 import retrofit2.Response
 
 
-class RegisterUseCase(val authRepository: AuthRepository) {
-
+class RegisterUseCase(private val mRepository: AuthRepository) {
     fun registerEmail(emailRegistration: EmailRegistration) : Observable<ResponseBody>{
-        return authRepository.registerEmail(emailRegistration)
+        return mRepository.registerEmail(emailRegistration)
     }
 
     fun registerVk(registrationObject: SocNetRegistrationRequest):Observable<Response<SocNetRegistrationResponse>>{
-        return authRepository.registerVk(registrationObject)
+        return mRepository.registerVk(registrationObject)
     }
 
     fun registerFb(registrationObject: SocNetRegistrationRequest):Observable<Response<SocNetRegistrationResponse>>{
-        return authRepository.registerFb(registrationObject)
+        return mRepository.registerFb(registrationObject)
     }
 
 }

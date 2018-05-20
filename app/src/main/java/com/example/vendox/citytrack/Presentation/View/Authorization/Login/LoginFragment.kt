@@ -43,6 +43,7 @@ class LoginFragment : Fragment(), LoginView {
     lateinit var btnLoginFb: Button
     lateinit var btnLoginFbFake: LoginButton
     lateinit var editTextPassword: MaterialEditText
+    lateinit var editTextEmail: MaterialEditText
     lateinit var tvAgreement: TextView
     lateinit var tvForgotPassword: TextView
     lateinit var cardviewLogin:CardView
@@ -65,18 +66,26 @@ class LoginFragment : Fragment(), LoginView {
         btnLogin.setOnClickListener { view ->
             val emailLogin = EmailLogin("kvitaly21@yandex.ru", "123123123")
             presenter.loginEmail(emailLogin)
+        editTextPassword = view!!.findViewById(R.id.login_password)
+        editTextEmail = view.findViewById(R.id.login_email)
+
+        btnLogin = view.findViewById(R.id.btn_login)
+        btnLogin.setOnClickListener { clickedView ->
+//            val emailRegistraion = EmailRegistration("Vitaly", "Kalenik", "kvitaly21@yandex.ru", "123123123")
+            val emailLogin = EmailLogin(editTextEmail.text.toString(), editTextPassword.text.toString())
+            presenter.loginEmail(emailLogin)
         }
 
-        btnLoginVk = view!!.findViewById(R.id.btn_login_vk)
-        btnLoginVk.setOnClickListener { view ->
+        btnLoginVk = view.findViewById(R.id.btn_login_vk)
+        btnLoginVk.setOnClickListener { clickedView ->
             VKSdk.login(this, *arrayOf())
         }
-        btnLoginFb = view!!.findViewById(R.id.btn_login_fb)
-        btnLoginFb.setOnClickListener { view ->
+        btnLoginFb = view.findViewById(R.id.btn_login_fb)
+        btnLoginFb.setOnClickListener { clickedView ->
             btnLoginFbFake.performClick()
         }
 
-        btnLoginFbFake = view!!.findViewById<LoginButton>(R.id.btn_login_fb_fake)
+        btnLoginFbFake = view.findViewById<LoginButton>(R.id.btn_login_fb_fake)
         btnLoginFbFake.setReadPermissions("email", "public_profile")
         btnLoginFbFake.setFragment(this)
         btnLoginFbFake.registerCallback(callbackManager, object : FacebookCallback<LoginResult> {
@@ -95,8 +104,6 @@ class LoginFragment : Fragment(), LoginView {
             }
         });
 
-        editTextPassword = view!!.findViewById<MaterialEditText>(R.id.login_password)
-
         tvAgreement = view.findViewById(R.id.tv_login_agreement)
         tvForgotPassword = view.findViewById(R.id.tv_login_forgot_password)
         tvForgotPassword.setOnClickListener { forgotPassword() }
@@ -111,6 +118,7 @@ class LoginFragment : Fragment(), LoginView {
 
             val heightDiff = view.rootView.height - (r.bottom - r.top)
             if (heightDiff > 500) { // if more than 100 pixels, its probably a keyboard...
+//                Log.d("myLogs", "Фокус");
                 val params = LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT)
                 params.bottomMargin = 40
                 tvAgreement.layoutParams = params
@@ -121,6 +129,7 @@ class LoginFragment : Fragment(), LoginView {
                 tvForgotPassword.visibility = View.GONE
                 cardviewLogin.layoutParams.height = WindowManager.LayoutParams.WRAP_CONTENT
             } else {
+//                Log.d("myLogs", "Расфокус");
                 val params = LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT)
                 params.bottomMargin = 0
                 tvAgreement.layoutParams = params

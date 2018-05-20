@@ -12,8 +12,5 @@ class RepositoryProvider {
             return AuthRepositoryImpl()
         }
 
-        fun getRoute():Route{
-            return GetRoute()
-        }
     }
 }
