@@ -44,6 +44,7 @@ class SendCodeFragment : Fragment(), SendCodeView {
         sendCodeButton.setOnClickListener { view ->
             presenter.sendCode(email.text.toString(), code.text.toString())
         }
+        // Просто комментарий
 
         return view
     }
