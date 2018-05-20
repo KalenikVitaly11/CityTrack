@@ -1,10 +1,8 @@
 package com.example.vendox.citytrack.Presentation.View.Authorization.Registration.FirstScreen
 
 import android.util.Log
-import com.example.vendox.citytrack.Domain.DataClasses.Request.EmailRegistration
 import com.example.vendox.citytrack.Domain.DataClasses.Request.SocNetRegistrationRequest
 import com.example.vendox.citytrack.Domain.UseCases.RegisterUseCase
-import com.example.vendox.citytrack.Presentation.View.Authorization.Registration.SecondScreen.RegistrationFinishView
 
 /**
  * Created by Vitaly on 02.04.2018.

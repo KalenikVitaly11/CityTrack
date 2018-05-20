@@ -1,7 +1,9 @@
 package com.example.vendox.citytrack.Data
 
+import com.example.vendox.citytrack.Domain.DataClasses.Request.EmailLogin
 import com.example.vendox.citytrack.Domain.DataClasses.Request.EmailRegistration
 import com.example.vendox.citytrack.Domain.DataClasses.Request.SocNetRegistrationRequest
+import com.example.vendox.citytrack.Domain.DataClasses.Response.EmailLoginResponse
 import com.example.vendox.citytrack.Domain.DataClasses.Response.SocNetRegistrationResponse
 import io.reactivex.Observable
 import okhttp3.ResponseBody
@@ -21,11 +23,14 @@ interface AuthApi {
     @POST("/networks")
     fun registerSocialNetwork(@Body body:SocNetRegistrationRequest): Observable<Response<SocNetRegistrationResponse>>
 
+    @POST("/login")
+    fun loginEmail(@Body body: EmailLogin):Observable<Response<EmailLoginResponse>>
+
 
     companion object {
         fun create(): AuthApi {
             val retrofit = Retrofit.Builder()
-                    .baseUrl("https://private-08661-citytrack.apiary-mock.com/")
+                    .baseUrl("http://citytrack.online/")
                     .addConverterFactory(GsonConverterFactory.create())
                     .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
                     .build()

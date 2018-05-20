@@ -9,13 +9,7 @@ import okhttp3.ResponseBody
 import retrofit2.Response
 
 
-class RegisterUseCase {
-    private lateinit var mRepository: AuthRepository
-
-    constructor(authRepository: AuthRepository) {
-        mRepository = authRepository
-    }
-
+class RegisterUseCase(private val mRepository: AuthRepository) {
     fun registerEmail(emailRegistration: EmailRegistration) : Observable<ResponseBody>{
         return mRepository.registerEmail(emailRegistration)
     }

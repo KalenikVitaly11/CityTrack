@@ -88,13 +88,13 @@ class RegistrationFragment : Fragment(), RegistrationView {
 
             val heightDiff = rootView.rootView.height - (r.bottom - r.top)
             if (heightDiff > 500) { // if more than 100 pixels, its probably a keyboard...
-                Log.d("myLogs", "Фокус")
+//                Log.d("myLogs", "Фокус")
                 tvAgreement.setText("Авторизуясь, вы принимаете условия пользовательского соглашения. Подробнее можно ознакомиться здесь.")
                 btnRegistrationVk.visibility = View.GONE
                 btnRegistrationFb.visibility = View.GONE
 
             } else {
-                Log.d("myLogs", "Расфокус")
+//                Log.d("myLogs", "Расфокус")
                 tvAgreement.setText("Или используя один из сервисов")
                 btnRegistrationVk.visibility = View.VISIBLE
                 btnRegistrationFb.visibility = View.VISIBLE
